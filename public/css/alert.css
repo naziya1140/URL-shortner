@@ -1,0 +1,20 @@
+.alert{
+    height: auto;
+    width: 300px;
+    padding: 20px;
+    background: linear-gradient(135deg, #003f5c, black, #003f5c);
+    border-radius: 10px;
+    border: 1px solid rgb(255, 255, 255);
+    position: absolute;
+    top: 40px;
+    align-self: center;
+    text-align: center;
+}
+
+.success{
+    color: green;
+}
+
+.error{
+    color: red;
+}

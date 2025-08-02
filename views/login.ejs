@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - QuickShort URL</title>
+  <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+  <header>
+    <h1>QuickShort URL</h1>
+    <a href="/">Back to Home</a>
+  </header>
+
+  <div class="container">
+    <h2>Login</h2>
+    <%- include('./partials/alert') %>
+
+    <form action="/users/login" method="POST">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <button type="submit">Log in</button>
+    </form>
+    <p class="signup-link">Don't have an account? <a href="/users/signup">Sign Up</a></p>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 QuickShort. All rights reserved.</p>
+  </footer>
+</body>
+</html>

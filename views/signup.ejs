@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - QuickShort URL</title>
+  <link rel="stylesheet" href="/css/signup.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="/" class="brand">QuickShort URL</a>
+    <nav class="nav-right">
+      <a class="nav-link" href="/">Back to Home</a>
+    </nav>
+  </header>
+
+  <!-- Sign Up Container -->
+   <%- include('./partials/alert') %>
+  <div class="container">
+    <h2>Sign Up</h2>
+    <form method="POST" action="/users/signup">
+      <input type="text" name="username" placeholder="Enter your username" required />
+
+      <input type="email" name="email" placeholder="Enter your email" required />
+
+      <input type="password" name="password" id='password' placeholder="Create a password" autocomplete="new-password"
+        required />
+        
+      <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" required/>
+      <p id="feedback-block"></p>
+
+      <button type="submit" id="submit">Register</button>
+      <p class="login-link">Already have an account? <a href="/users/login">Login</a></p>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 QuickShort. All rights reserved.</p>
+  </footer>
+
+</body>
+<script>
+  const passwordBox = document.querySelector('#password');
+  const feedback = document.querySelector('#feedback-block');
+
+  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+  passwordBox.addEventListener('input', () => {
+    const password = passwordBox.value;
+    console.log(password);
+    if (regex.test(password)) {
+      feedback.textContent = '✅ Strong Password';
+      feedback.style.color = 'green';
+    }
+    else{
+      feedback.textContent = '❌ Weak Password';
+      feedback.style.color = 'red';
+    }
+    // else{
+    //   feedback.innerHTML = `
+    //   <div style="color: white; font-size: 14px; margin-top: 0px;">
+    //     <ul style="padding-left: 0px; margin: 0;">
+    //       <li>Minimum 8 characters</li>
+    //       <li>At least one alphabet</li>
+    //       <li>At least one numeral</li>
+    //       <li>At least one special character</li>
+    //     </ul>
+    //   </div>
+    // `;
+    // }
+  })
+
+  const sumitBtn = document.querySelector('#submit');
+  sumitBtn.addEventListener('click', (event)=>{
+    const password = passwordBox.value;
+    const confirmPassword = document.querySelector('#confirmPassword');
+
+    if(!regex.test(password)){
+      event.preventDefault();
+      feedback.innerHTML = `<p>Password must be at least 8 characters and should have at least one alphabet, one numeral and one special character.</p>`;
+      feedback.style.color = 'red';
+
+      setTimeout(() => {
+        feedback.innerHTML = '';
+      }, 3000);
+    }
+    else if(confirmPassword.value !== password){
+      event.preventDefault();
+      feedback.innerHTML = `<p>Passwords do not match</p>`;
+      feedback.style.color = 'red';
+      
+      setTimeout(() => {
+        feedback.innerHTML = '';
+      }, 3000);
+    }
+  });
+</script>
+</html>

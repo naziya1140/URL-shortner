@@ -1,0 +1,187 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #000000, #003f5c, #00adb5, #029b96);
+  background-size: 400% 400%;
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 15px 30px;
+  border-bottom: 1px solid #333;
+}
+
+.brand {
+  font-size: 1.8rem;
+  text-decoration: none;
+  color: #00fff5;
+  font-weight: bold;
+}
+
+.nav-right {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-link {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #00fff5;
+}
+
+.logout-btn {
+  background: linear-gradient(90deg, #00fff5, #00adb5);
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, #00f5d4, #00cfcf);
+}
+
+.main-content {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+  flex: 1;
+  min-width: 80vw; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Optional: centers any small content vertically */
+}
+
+.generated-link {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #ffffff;
+  font-weight: 600;
+  background: linear-gradient(135deg, #003f5c, #003f5c, #000000);
+  padding:10px;
+  border-radius: 10px;
+}
+
+.generated-link a{
+  color: #00adb5;
+  font-weight: 400;
+}
+
+.url-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.url-form label {
+  font-size: 1rem;
+  color: #cccccc;
+}
+
+.url-form input {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #1e1e1e;
+  color: white;
+  font-size: 1rem;
+}
+
+.submit-btn {
+  background: linear-gradient(90deg, #00fff5, #00adb5);
+  color: #000;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, #00f5d4, #00cfcf);
+}
+
+.section-title {
+  margin-top: 30px;
+  font-size: 1.5rem;
+  color: #00fff5;
+  justify-self: center;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.url-table {
+  width: 100%;
+  table-layout: fixed;  /* Add this to control column widths */
+  border-collapse: collapse;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+}
+
+.url-table th,
+.url-table td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #333;
+  color: #e0e0e0;
+  font-size: 0.95rem;
+  /* word-wrap: break-word;  Ensures long links break lines */
+  overflow-x:hidden;
+}
+
+.url-table th {
+  background-color: rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+}
+
+.url-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.url-table a {
+  color: #00fff5;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+footer {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #b0b0b0;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9rem;
+  border-top: 1px solid #333;
+}

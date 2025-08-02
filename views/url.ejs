@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Url Page - QuickShort</title>
+  <link rel="stylesheet" href="/css/url.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+   <%- include('./partials/alert') %>
+   
+  <header class="navbar">
+    <a href="/" class="brand">QuickShort</a>
+    <nav class="nav-right">
+      <button class="logout-btn">Logout</button>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <% if(id){ %>
+      <p class="generated-link">
+        New link generated: <a href="<%= id %>" target="_blank">
+          <%= id %>
+        </a>
+      </p>
+      <% } %>
+
+        <form action="/url" method="post" class="url-form">
+        <!-- <div class="url-form"> -->
+          <label>Enter URL</label>
+          <input type="text" name="url" id='inputBox' placeholder="https://example.com" required>
+          <button class="generate-btn submit-btn">Generate</button>
+        <!-- </div> -->
+        </form>
+
+        <h3 class="section-title">Analytics</h3>
+        <% if(!urlDetail || urlDetail.length <= 0){ %>
+          <div>
+            <h3 style="text-align: center;">No Data to Show!</h3>
+          </div>
+          <% } %>
+            <% if(urlDetail && urlDetail.length> 0){ %>
+              <div class="table-wrapper">
+                <table class="url-table">
+                  <thead>
+                    <tr>
+                      <th>Generated URL</th>
+                      <th>Original URL</th>
+                      <th>Click Count</th>
+                      <th>Delete URL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% urlDetail.forEach((el)=> { %>
+                      <tr>
+                        <td><a href="<%= el.newUrl %>" target="_blank">
+                            <%= el.newUrl %>
+                          </a></td>
+                        <td>
+                          <%= el.oldUrl %>
+                        </td>
+                        <td>
+                          <%= el.visitedHistory.length %>
+                        </td>
+                        <td>
+                          <button class="delete-url" data-id="<%= el._id %>">Delete</button>
+                        </td>
+                        <!-- passing the id of the particular entry. -->
+                      </tr>
+                      <% }) %>
+                  </tbody>
+                </table>
+              </div>
+              <% } %>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 QuickShort. All rights reserved.</p>
+  </footer>
+
+  <!-- Logout Script -->
+  <script>
+    const btn = document.querySelector('.logout-btn');
+    btn.addEventListener('click', async () => {
+      try {
+        await fetch('/users/logout', {
+          method: 'POST',
+          credentials: 'include'
+        })
+          .then(res => {
+            if (res.ok) {
+              window.location.href = '/';
+            }
+          })
+          .catch(e => {
+            console.log(`Error occurred during logout: ${e}`);
+          });
+      } catch (e) {
+        console.log(e);
+      }
+    });
+    
+    // for deleting URL.
+    const table = document.querySelector('.url-table');
+    table.addEventListener('click', async (event) => {
+      try {
+        if(event.target.classList.contains('delete-url')){
+          const deleteBtn = event.target;
+          const urlId = deleteBtn.getAttribute('data-id');
+          if (urlId) {
+            const res = await fetch(`/users/delete/${urlId}`, { method: 'delete' })
+            if (res.ok) {
+              window.location.href = '/url?generated=';
+            }
+          }
+        }
+      }
+      catch (e) {
+        console.log(`Error occurred while deleting URL: ${e}`);
+      }
+    });
+  </script>
+</body>
+</html>
