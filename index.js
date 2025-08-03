@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 
-const domain = process.env.DOMAIN || 'http://localhost';
+const domain = process.env.DOMAIN;
 const PORT = process.env.PORT || 8000;
 const uri = process.env.MONGO_URI;
 
@@ -34,5 +34,5 @@ app.use('/users', userRoute);
 app.use('/', indexRoute);
 
 app.listen(PORT, ()=>{
-    console.log(`Server Running at ${domain}:${PORT}`)
+    console.log(`Server Running at ${domain}`)
 });
