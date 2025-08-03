@@ -1,11 +1,15 @@
 import { urlData } from '../models/url.js';
+import dotenv from 'dotenv';
+dotenv.config();
+const domain = process.env.DOMAIN || 'http://localhost';
+const PORT = process.env.PORT || 8000;
 
 //whenever a request on new URL is made.
 async function logAndRedirectUrl(req, res) {
     try {
         const shortId = req.params.shortId;//validating if shortId has URL.
         if (!shortId) return res.status(400).json('Enter url');
-        const data = await urlData.findOneAndUpdate({ newUrl: `http://127.0.0.1:8000/${shortId}` }, { $push: { visitedHistory: { timestamp: Date.now() } } });
+        const data = await urlData.findOneAndUpdate({ newUrl: `${domain}:${PORT}/${shortId}` }, { $push: { visitedHistory: { timestamp: Date.now() } } });
         if (!data) return res.status(400).json('Please enter a valid URL');//url not exist in Database.
         const original = data.oldUrl;
         return res.redirect(original);
